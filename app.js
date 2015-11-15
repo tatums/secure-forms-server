@@ -13,6 +13,7 @@ app.use(morgan('dev'));
 // Models
 var Form   = require('./models/form');
 var User   = require('./models/user');
+var Message   = require('./models/message');
 
 
 // configure app to use bodyParser()
@@ -28,6 +29,39 @@ router.get('/users', function(req, res) {
     if (err)
       res.send(err);
     res.json(users);
+  });
+});
+
+router.post('/messages', function(req, res) {
+  console.log('req', req.body);
+  var message = new Message();
+  message.to = req.body.to;
+  // message.from = req.body.from;
+  message.body = req.body.body;
+  message.signature = req.body.signature;
+  message.symmetricKey = req.body.symmetricKey;
+
+  // save the form and check for errors
+  message.save(function(err) {
+    console.log('errr', err)
+    if (err)
+      res.send(err);
+    res.json({ message: 'Message created!' });
+  });
+
+});
+
+
+router.put('/users/:id', function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+   if (err)
+      res.send(err);
+    user.publicKey = req.body.publicKey;
+    user.save(function(err) {
+      if (err)
+        res.send(err);
+      res.json({ message: 'user updated!' });
+    });
   });
 });
 
