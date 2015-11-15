@@ -33,10 +33,9 @@ router.get('/users', function(req, res) {
 });
 
 router.post('/messages', function(req, res) {
-  console.log('req', req.body);
   var message = new Message();
   message.to = req.body.to;
-  // message.from = req.body.from;
+  message.from = req.body.from;
   message.body = req.body.body;
   message.signature = req.body.signature;
   message.symmetricKey = req.body.symmetricKey;
