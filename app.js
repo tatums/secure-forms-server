@@ -22,15 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-// User Routes
-
-router.get('/users', function(req, res) {
-  User.find(function(err, users) {
-    if (err)
-      res.send(err);
-    res.json(users);
-  });
-});
+// Message Routes
 
 router.post('/messages', function(req, res) {
   var message = new Message();
@@ -50,6 +42,26 @@ router.post('/messages', function(req, res) {
 
 });
 
+
+// User Routes
+
+router.get('/users', function(req, res) {
+  User.find(function(err, users) {
+    if (err)
+      res.send(err);
+    res.json(users);
+  });
+});
+
+router.delete('/users/:id', function (req, res) {
+  User.remove({
+    _id: req.params.id
+  }, function(err, user) {
+    if (err)
+      res.send(err);
+    res.json({ message: 'Successfully deleted' });
+  });
+});
 
 router.put('/users/:id', function(req, res) {
   User.findById(req.params.id, function(err, user) {
