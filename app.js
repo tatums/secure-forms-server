@@ -42,8 +42,29 @@ router.post('/messages', function(req, res) {
 
 });
 
+router.get('/messages', function(req, res) {
+  Message.find(function(err, messages) {
+    if (err)
+      res.send(err);
+    res.json(messages);
+  });
+});
 
 // User Routes
+
+router.get('/users/:id/messages', function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    if (err)
+      res.send(err);
+
+    Message.find({to: user._id},function(err, messages) {
+      if (err)
+        res.send(err);
+      res.json(messages);
+    });
+
+  });
+});
 
 router.get('/users/:id', function(req, res) {
   User.findById(req.params.id, function(err, user) {
