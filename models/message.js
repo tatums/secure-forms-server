@@ -5,8 +5,9 @@ var MessageSchema   = new Schema({
   to: { type: Schema.Types.ObjectId, ref: 'User' },
   from: { type: Schema.Types.ObjectId, ref: 'User' },
   body: String,
-  signature: String,
-  symmetricKey: String
+  iv: String,
+  tag: String,
+  encapsulation: String
 });
 
 module.exports = mongoose.model('Message', MessageSchema);

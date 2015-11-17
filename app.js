@@ -29,17 +29,17 @@ router.post('/messages', function(req, res) {
   message.to = req.body.to;
   message.from = req.body.from;
   message.body = req.body.body;
-  message.signature = req.body.signature;
-  message.symmetricKey = req.body.symmetricKey;
+  message.iv = req.body.iv;
+  message.tag = req.body.tag;
+  message.encapsulation = req.body.encapsulation;
 
   // save the form and check for errors
   message.save(function(err) {
     console.log('errr', err)
     if (err)
       res.send(err);
-    res.json({ message: 'Message created!' });
+    res.json(message);
   });
-
 });
 
 router.get('/messages', function(req, res) {
@@ -113,7 +113,7 @@ router.post('/users', function(req, res) {
   user.save(function(err) {
     if (err)
       res.send(err);
-    res.json({ message: 'User created!' });
+    res.json(user);
   });
 
 });
