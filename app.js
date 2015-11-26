@@ -109,6 +109,7 @@ router.post('/users', function(req, res) {
   var user = new User();
   user.firstName = req.body.firstName;
   user.lastName = req.body.lastName;
+  user.publicKey = req.body.publicKey;
   // save the user and check for errors
   user.save(function(err) {
     if (err)
