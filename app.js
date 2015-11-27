@@ -23,6 +23,10 @@ var Message   = require('./models/message');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.get('/', function(req, res) {
+  res.send('Secure Forms');
+});
+
 
 // Message Routes
 
