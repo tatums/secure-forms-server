@@ -8,7 +8,7 @@ var app     = express();
 var port    = process.env.PORT || 8080;
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://' + process.env.MONGO_HOST + '/' + process.env.MONGO_STORE);
+mongoose.connect(process.env.MONGOLAB_URI);
 
 app.use(morgan('dev'));
 
