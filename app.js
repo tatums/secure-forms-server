@@ -6,6 +6,8 @@ var bodyParser = require('body-parser')
 var morgan  = require('morgan');
 var app     = express();
 var port    = process.env.PORT || 8080;
+var cors = require('cors')
+app.use(cors());
 
 var mongoose   = require('mongoose');
 mongoose.connect(process.env.MONGOLAB_URI);
