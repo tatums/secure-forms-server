@@ -6,7 +6,8 @@ var bodyParser = require('body-parser')
 var morgan  = require('morgan');
 var app     = express();
 var port    = process.env.PORT || 8080;
-var cors = require('cors')
+var cors = require('cors');
+var sendgrid  = require('sendgrid')(process.env.SENDGRID_API_KEY);
 app.use(cors());
 
 var mongoose   = require('mongoose');
@@ -18,6 +19,20 @@ app.use(morgan('dev'));
 var Form   = require('./models/form');
 var User   = require('./models/user');
 var Message   = require('./models/message');
+
+
+var payload   = {
+  to      : 'tatum@ashlandstudios.com',
+  from    : 'from@other.com',
+  subject : 'Saying Hi',
+  text    : 'This is my first email through SendGrid'
+}
+
+//sendgrid.send(payload, function(err, json) {
+//  if (err) { console.error(err); }
+//  console.log(json);
+//});
+
 
 
 // configure app to use bodyParser()
