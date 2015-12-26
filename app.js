@@ -153,17 +153,17 @@ router.get('/forms', function(req, res) {
 });
 
 router.post('/forms', function(req, res) {
-
   var form = new Form();
   form.title = req.body.title;
+  form.body = req.body.body;
+  form.owner = req.body.owner
 
   // save the form and check for errors
   form.save(function(err) {
     if (err)
       res.send(err);
-    res.json({ message: 'Form created!' });
+      res.json(form);
   });
-
 });
 
 
